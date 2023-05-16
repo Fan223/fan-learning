@@ -1,18 +1,21 @@
 package fan.classic_sort;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 选择排序
  *
  * @author Fan
  * @since 2023/3/1 15:21
  */
+@Slf4j
 public class SelectionSort {
     public static void main(String[] args) {
         int[] data = {6, 4, 3, 23, 27, 23, 14, 10};
         selectionSort(data);
 
         for (int datum : data) {
-            System.out.print(datum + " ");
+            log.info(datum + " ");
         }
     }
 

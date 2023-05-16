@@ -47,13 +47,9 @@ public class FileHandler {
         return fileList;
     }
 
-    private static List<String> walkFiles(String path) {
+    private static List<Path> walkFiles(String path) {
         try (Stream<Path> walk = Files.walk(Paths.get(path))) {
-            return walk.filter(Files::isRegularFile)
-                    .map(file -> {
-                        Path fileName = file.getFileName();
-                        return fileName.toString();
-                    }).collect(Collectors.toList());
+            return walk.filter(Files::isRegularFile).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
             return Collections.emptyList();

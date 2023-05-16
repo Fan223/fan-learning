@@ -1,5 +1,7 @@
 package fan.classic_sort;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 
 /**
@@ -8,13 +10,14 @@ import java.util.Arrays;
  * @author Fan
  * @since 2023/3/2 17:12
  */
+@Slf4j
 public class MergeSort {
     public static void main(String[] args) {
         int[] data = {6, 4, 3, 23, 27, 23, 14, 10};
         int[] mergeSort = mergeSort(data);
 
         for (int sort : mergeSort) {
-            System.out.print(sort + " ");
+            log.info(sort + " ");
         }
     }
 
