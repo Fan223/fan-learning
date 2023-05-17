@@ -3,7 +3,7 @@ package fan.classic_sort;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 冒泡排序
+ * 插入排序
  *
  * @author Fan
  * @since 2023/3/1 10:42
