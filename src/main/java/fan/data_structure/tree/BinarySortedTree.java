@@ -256,64 +256,31 @@ public class BinarySortedTree {
 
             // 将最小节点的值赋值给要删除节点
             delete.data = min.data;
-            // 然后就是删除最小节点
+            // 然后就是删除最小节点, 让最小节点成为删除节点, 对应最小节点的父节点即为删除节点的父节点, 这样就完成了替换, 通过后面的步骤即可删除
             delete = min;
             deleteParent = minParent;
         }
 
-        // 删除节点是叶子节点或仅有一个子节点
+        // 删除节点是叶子节点或仅有一个子节点, 找到删除节点的子节点, 然后让删除节点的父节点的子节点指向删除节点的子节点, 从而删除待删除节点
+        TreeNode child;
+        if (null != delete.leftChild) {
+            child = delete.leftChild;
+        } else if (null != delete.rightChild) {
+            child = delete.rightChild;
+        } else {
+            child = null;
+        }
 
-
-//        TreeNode parentTreeNode = root;
-//
-//        if (delete.leftChild == null && delete.rightChild == null) { // 叶子节点
-//            if (delete == root) {
-//                root = null;
-//            } else if (parentTreeNode.leftChild == delete) { // 左子节点
-//                parentTreeNode.leftChild = null;
-//            } else { // 右子节点
-//                parentTreeNode.rightChild = null;
-//            }
-//        } else if (delete.leftChild == null) { // 只有一个右子节点
-//            if (delete == root) {
-//                root = delete.rightChild;
-//            } else if (parentTreeNode.leftChild == delete) { // 左子节点
-//                parentTreeNode.leftChild = delete.rightChild;
-//            } else { // 右子节点
-//                parentTreeNode.rightChild = delete.rightChild;
-//            }
-//        } else if (delete.rightChild == null) { // 只有一个左子节点
-//            if (delete == root) {
-//                root = delete.leftChild;
-//            } else if (parentTreeNode.leftChild == delete) { // 左子节点
-//                parentTreeNode.leftChild = delete.leftChild;
-//            } else { // 右子节点
-//                parentTreeNode.rightChild = delete.leftChild;
-//            }
-//        } else { // 有两个子节点
-//            // 先定义一个 替换节点 保存要删除节点的右子树的最小值
-//            TreeNode replaceTreeNode = delete.rightChild;
-//            // 定义一个 替换节点的父节点 保存要删除节点的右子树的最小值的父节点
-//            TreeNode replaceParentTreeNode = delete;
-//
-//            // 找到删除节点的右节点的最左子节点, 即右子树的最小值
-//            while (replaceTreeNode.leftChild != null) {
-//                // 将其赋值给 替换节点的父节点
-//                replaceParentTreeNode = replaceTreeNode;
-//                // 将其 左节点 赋值给替换节点
-//                replaceTreeNode = replaceTreeNode.leftChild;
-//            }
-//            // 将替换节点的值赋值给要删除节点
-//            delete.data = replaceTreeNode.data;
-//            // 如果替换节点的父节点的左节点是替换节点, 则将替换节点的右节点赋值给替换节点的父节点的左节点
-//            // 即有最左子节点的情况
-//            if (replaceParentTreeNode.leftChild == replaceTreeNode) {
-//                replaceParentTreeNode.leftChild = replaceTreeNode.rightChild;
-//            } else {
-//                // 如果替换节点的父节点的右节点是替换节点, 则将替换节点的右节点赋值给替换节点的父节点的右节点
-//                // 即没有左子节点的情况, 删除节点的右子节点就是替换节点, 同时其并没有左子节点, 所以使用替换节点的右节点
-//                replaceParentTreeNode.rightChild = replaceTreeNode.rightChild;
-//            }
-//        }
+        // 删除节点是根节点, 即删除节点的父节点为 null
+        if (null == deleteParent) {
+            // 则让根节点为删除节点的子节点
+            root = child;
+        } else if (delete == deleteParent.leftChild) {
+            // 让删除节点的父节点的左子节点为删除节点的子节点, 即将删除节点删除
+            deleteParent.leftChild = child;
+        } else {
+            // 让删除节点的父节点的右子节点为删除节点的子节点, 即将删除节点删除
+            deleteParent.rightChild = child;
+        }
     }
 }

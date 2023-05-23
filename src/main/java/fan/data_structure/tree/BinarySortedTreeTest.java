@@ -44,6 +44,7 @@ public class BinarySortedTreeTest {
 
         binarySortedTree.delete(7);
         System.out.print("删除值【7】后的二叉排序树：");
+        // 5 2 9 1 3 6 12 4 10 13 11
         binarySortedTree.levelOrder(binarySortedTree.root);
     }
 }
