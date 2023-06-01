@@ -3,7 +3,7 @@ package fan.data_structure.queue;
 import java.util.Arrays;
 
 /**
- * 循环顺序队列
+ * 循环数组队列
  *
  * @author Fan
  * @since 2023/2/28 10:08
@@ -53,6 +53,13 @@ public class CirculateArrayQueue<T> {
         this.storage = (T[]) new Object[capacity];
         this.head = 0;
         this.tail = 0;
+    }
+
+    public void queryQueue() {
+        for (int i = head; i != tail; i = (i + 1) % capacity) {
+            System.out.print(storage[i] + " ");
+        }
+        System.out.println();
     }
 
     /**
@@ -139,5 +146,13 @@ public class CirculateArrayQueue<T> {
         }
 
         return storage[head];
+    }
+
+    public T getLast() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Queue is empty.");
+        }
+
+        return storage[(tail - 1 + capacity) % capacity];
     }
 }
