@@ -16,9 +16,6 @@ public class LinkedNode<T> implements Iterable<T> {
      */
     private final Node<T> head;
 
-    /**
-     * 链表长度
-     */
     private int length;
 
     public LinkedNode() {
@@ -45,13 +42,13 @@ public class LinkedNode<T> implements Iterable<T> {
          *        /
          *     add
          */
-        addNode.setNext(head.getNext());
+        addNode.next = head.next;
         /*
          * head    1 -> 2
          *   \    /
          *     add
          */
-        head.setNext(addNode);
+        head.next = addNode;
         length++;
 
         return true;
@@ -69,12 +66,12 @@ public class LinkedNode<T> implements Iterable<T> {
 
         // 找到链表的最后一个节点
         Node<T> current = head;
-        while (null != current.getNext()) {
-            current = current.getNext();
+        while (null != current.next) {
+            current = current.next;
         }
 
-        // head -> 1 -> 2 -> add
-        current.setNext(addNode);
+        // head -> 1 -> 2(current) -> add
+        current.next = addNode;
         length++;
 
         return true;
@@ -101,13 +98,13 @@ public class LinkedNode<T> implements Iterable<T> {
              *                      /
              *                   add
              */
-            addNode.setNext(current.getNext());
+            addNode.next = current.next;
             /*
              * head -> 1(current)    2 -> 3
              *              \       /
              *                 add
              */
-            current.setNext(addNode);
+            current.next = addNode;
             length++;
         }
 
@@ -129,7 +126,7 @@ public class LinkedNode<T> implements Iterable<T> {
 
         Node<T> current = head;
         for (int i = 0; i <= index; i++) {
-            current = current.getNext();
+            current = current.next;
         }
 
         return current;
@@ -144,7 +141,7 @@ public class LinkedNode<T> implements Iterable<T> {
      * @since 2023/2/20 15:14
      */
     public T get(int index) {
-        return getNode(index).getValue();
+        return getNode(index).value;
     }
 
     /**
@@ -163,15 +160,15 @@ public class LinkedNode<T> implements Iterable<T> {
         Node<T> current = 0 == index ? head : getNode(index - 1);
 
         // 获取删除节点
-        Node<T> delNode = current.getNext();
+        Node<T> delNode = current.next;
         /*
          * head -> 1(current)    2(del) -> 3
          *               \________________/
          */
-        current.setNext(delNode.getNext());
+        current.next = delNode.next;
         length--;
 
-        return delNode.getValue();
+        return delNode.value;
     }
 
     /**
@@ -185,9 +182,9 @@ public class LinkedNode<T> implements Iterable<T> {
     public int indexOf(T value) {
         Node<T> current = head;
 
-        for (int i = 0; null != current.getNext(); i++) {
-            current = current.getNext();
-            if (value.equals(current.getValue())) {
+        for (int i = 0; null != current.next; i++) {
+            current = current.next;
+            if (value.equals(current.value)) {
                 return i;
             }
         }
@@ -203,7 +200,7 @@ public class LinkedNode<T> implements Iterable<T> {
      */
     public boolean clear() {
         // 头节点的 next 指向 null 就是空链表
-        head.setNext(null);
+        head.next = null;
         length = 0;
 
         return true;
@@ -219,7 +216,7 @@ public class LinkedNode<T> implements Iterable<T> {
         // 存储当前节点的前驱节点
         Node<T> prev = null;
         // 例: head -> 1(current) -> 2 -> 3
-        Node<T> current = head.getNext();
+        Node<T> current = head.next;
 
         while (null != current) {
             /*
@@ -229,7 +226,7 @@ public class LinkedNode<T> implements Iterable<T> {
              * (3) head -> 1 -> null
              *     2(prev) -> 1 -> null 3(current) null(next)
              */
-            Node<T> next = current.getNext();
+            Node<T> next = current.next;
 
             /*
              * 让当前节点的 next 指向当前节点的前驱节点, 完成反转操作
@@ -239,7 +236,7 @@ public class LinkedNode<T> implements Iterable<T> {
              * (3) head -> 1 -> null
              *     3(current) -> 2(prev) -> 1 -> null null(next)
              */
-            current.setNext(prev);
+            current.next = prev;
 
             /*
              * 将当前节点赋给当前节点的前驱节点
@@ -262,7 +259,7 @@ public class LinkedNode<T> implements Iterable<T> {
         }
 
         // 将头结点的 next 指向遍历的最后一个节点 prev, 即反转后的头结点, 链接到反转后的链表, head -> 3(prev) -> 2 -> 1 -> null
-        head.setNext(prev);
+        head.next = prev;
 
         return true;
     }
@@ -274,7 +271,7 @@ public class LinkedNode<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return null != current.getNext();
+                return null != current.next;
             }
 
             @Override
@@ -282,8 +279,8 @@ public class LinkedNode<T> implements Iterable<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                current = current.getNext();
-                return current.getValue();
+                current = current.next;
+                return current.value;
             }
         };
     }

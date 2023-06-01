@@ -23,6 +23,18 @@ public class LinkedStack<T> {
         length = 0;
     }
 
+    public int getLength() {
+        return length;
+    }
+
+    public void queryAll() {
+        StackNode<T> current = head;
+        while (null != current.next) {
+            current = current.next;
+            System.out.println(current.value + " ");
+        }
+    }
+
     /**
      * 入栈, 即头插法
      *
@@ -34,8 +46,8 @@ public class LinkedStack<T> {
     public boolean push(T value) {
         StackNode<T> addStackNode = new StackNode<>(value);
 
-        addStackNode.setNext(head.getNext());
-        head.setNext(addStackNode);
+        addStackNode.next = head.next;
+        head.next = addStackNode;
 
         length++;
         return true;
@@ -53,13 +65,13 @@ public class LinkedStack<T> {
             throw new IllegalArgumentException("Queue is empty.");
         }
 
-        StackNode<T> popStackNode = head.getNext();
+        StackNode<T> popStackNode = head.next;
 
         // 将头结点指向后继节点的后继节点
-        head.setNext(popStackNode.getNext());
+        head.next = popStackNode.next;
         length--;
 
-        return popStackNode.getValue();
+        return popStackNode.value;
     }
 
     public T peek() {
@@ -67,18 +79,18 @@ public class LinkedStack<T> {
             throw new IllegalArgumentException("Queue is empty.");
         }
 
-        return head.getNext().getValue();
+        return head.next.value;
     }
 
     public boolean clear() {
-        head.setNext(null);
+        head.next = null;
         length = 0;
 
         return true;
     }
 
     public boolean isEmpty() {
-        return null == head.getNext();
+        return null == head.next;
     }
 
     public int size() {

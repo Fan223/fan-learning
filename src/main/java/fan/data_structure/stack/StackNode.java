@@ -1,38 +1,24 @@
 package fan.data_structure.stack;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 /**
  * 链式栈节点
  *
  * @author Fan
  * @since 2023/2/28 9:44
  */
+@NoArgsConstructor
+@AllArgsConstructor
 public class StackNode<T> {
-    /**
-     * 节点值
-     */
-    private T value;
-    /**
-     * 后继节点
-     */
-    private StackNode<T> next;
 
-    public StackNode() {
-    }
+    public T value;
+
+    public StackNode<T> next;
 
     public StackNode(T value) {
         this.value = value;
-    }
-
-    public T getValue() {
-        return value;
-    }
-
-    public StackNode<T> getNext() {
-        return next;
-    }
-
-    public void setNext(StackNode<T> next) {
-        this.next = next;
     }
 }
 

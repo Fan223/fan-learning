@@ -16,9 +16,6 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
      */
     private final DoubleNode<T> head;
 
-    /**
-     * 链表长度
-     */
     private int length;
 
     public DoubleLinkedNode() {
@@ -47,14 +44,14 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
 
             // head -> 1 <-> 2
             // add <- 1
-            head.getNext().setPrev(addDoubleNode);
+            head.next.prev = addDoubleNode;
             // head -> 1 <-> 2
             // add <-> 1
-            addDoubleNode.setNext(head.getNext());
+            addDoubleNode.next = head.next;
             // head -> add <-> 1 <-> 2
-            head.setNext(addDoubleNode);
+            head.next = addDoubleNode;
             // head <-> add <-> 1 <-> 2
-            addDoubleNode.setPrev(head);
+            addDoubleNode.prev = head;
 
             length++;
         }
@@ -72,17 +69,17 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
     public boolean addLast(T value) {
         // 找到链表的最后一个节点
         DoubleNode<T> current = head;
-        while (null != current.getNext()) {
-            current = current.getNext();
+        while (null != current.next) {
+            current = current.next;
         }
 
         // 例: head <-> 1 <-> 2(current)
         DoubleNode<T> addDoubleNode = new DoubleNode<>(value);
 
         // head <-> 1 <-> 2(current) -> add
-        current.setNext(addDoubleNode);
+        current.next = addDoubleNode;
         // head <-> 1 <-> 2(current) <-> add
-        addDoubleNode.setPrev(current);
+        addDoubleNode.prev = current;
 
         length++;
         return true;
@@ -112,14 +109,14 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
 
             // head <-> 1 <-> 2 -> 3
             //              add <- 3
-            current.getNext().setPrev(current);
+            current.next.prev = current;
             // head <-> 1 <-> 2 -> 3
             //              add <-> 3
-            addDoubleNode.setNext(current.getNext());
+            addDoubleNode.next = current.next;
             // head <-> 1 <-> 2 -> add <-> 3
-            current.setNext(addDoubleNode);
+            current.next =addDoubleNode;
             // head <-> 1 <-> 2 <-> add <- 3
-            addDoubleNode.setPrev(current);
+            addDoubleNode.prev = current;
 
             length++;
         }
@@ -140,10 +137,9 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
             throw new IndexOutOfBoundsException("该位置超出链表范围");
         }
 
-        // 找到指定位置的上一个节点
         DoubleNode<T> current = head;
         for (int i = 0; i <= index; i++) {
-            current = current.getNext();
+            current = current.next;
         }
 
         return current;
@@ -158,7 +154,7 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
      * @since 2023/2/24 14:12
      */
     public T get(int index) {
-        return getDoubleNode(index).getValue();
+        return getDoubleNode(index).value;
     }
 
     /**
@@ -175,13 +171,13 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
 
         // head <-> 1 -> 2
         // head <- 2
-        delDoubleNode.getNext().setPrev(delDoubleNode.getPrev());
+        delDoubleNode.next.prev = delDoubleNode.prev;
         // head <- 1 -> 2
         // head <-> 2
-        delDoubleNode.getPrev().setNext(delDoubleNode.getNext());
+        delDoubleNode.prev.next = delDoubleNode.next;
 
         length--;
-        return delDoubleNode.getValue();
+        return delDoubleNode.value;
     }
 
     /**
@@ -195,9 +191,9 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
     public int indexOf(T value) {
         DoubleNode<T> current = head;
 
-        for (int i = 0; null != current.getNext(); i++) {
-            current = current.getNext();
-            if (value.equals(current.getValue())) {
+        for (int i = 0; null != current.next; i++) {
+            current = current.next;
+            if (value.equals(current.value)) {
                 return i;
             }
         }
@@ -212,7 +208,7 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
      * @since 2023/2/24 14:32
      */
     public boolean clear() {
-        head.setNext(null);
+        head.next = null;
         length = 0;
 
         return true;
@@ -227,16 +223,16 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
     public boolean reverse() {
         // 存储当前节点的前驱节点
         DoubleNode<T> prev = null;
-        DoubleNode<T> current = head.getNext();
+        DoubleNode<T> current = head.next;
 
         while (null != current) {
             // 存储当前节点的后继节点
-            DoubleNode<T> next = current.getNext();
+            DoubleNode<T> next = current.next;
 
             // 将当前节点的 prev 指向当前节点的后继节点, 与下一行代码一起完成反转操作
-            current.setPrev(next);
+            current.prev = next;
             // 将当前节点的 next 指向当前节点的前驱节点
-            current.setNext(prev);
+            current.next = prev;
 
             // 将当前节点赋给当前节点的前驱节点
             prev = current;
@@ -245,7 +241,7 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
         }
 
         // 将头结点的 next 指向遍历的最后一个节点 prev, 即反转后的头结点, 链接到反转后的链表
-        head.setNext(prev);
+        head.next = prev;
         return true;
     }
 
@@ -256,7 +252,7 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return null != current.getNext();
+                return null != current.next;
             }
 
             @Override
@@ -264,8 +260,8 @@ public class DoubleLinkedNode<T> implements Iterable<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                current = current.getNext();
-                return current.getValue();
+                current = current.next;
+                return current.value;
             }
         };
     }

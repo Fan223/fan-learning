@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * @author Fan
  * @since 2023/5/22 15:06
  */
-public class BinarySortedTree {
+public class BinarySearchTree {
 
     public TreeNode root;
 

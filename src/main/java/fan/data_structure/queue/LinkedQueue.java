@@ -18,9 +18,25 @@ public class LinkedQueue<T> {
      */
     private QueueNode<T> tail;
 
+    private int length;
+
     public LinkedQueue() {
         head = new QueueNode<>();
         tail = head;
+        length = 0;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void queryQueue() {
+        QueueNode<T> current = head;
+        while (null != current.next) {
+            current = current.next;
+            System.out.print(current.value + " ");
+        }
+        System.out.println();
     }
 
     /**
@@ -31,7 +47,7 @@ public class LinkedQueue<T> {
      * @since 2023/2/28 10:55
      */
     public boolean isEmpty() {
-        return head == tail;
+        return 0 == length;
     }
 
     /**
@@ -43,10 +59,9 @@ public class LinkedQueue<T> {
      * @since 2023/2/28 15:14
      */
     public boolean enqueue(T element) {
-        QueueNode<T> addQueueNode = new QueueNode<>(element);
-
-        tail.setNext(addQueueNode);
-        tail = tail.getNext();
+        tail.next = new QueueNode<>(element);
+        tail = tail.next;
+        length++;
 
         return true;
     }
@@ -63,8 +78,10 @@ public class LinkedQueue<T> {
             throw new IllegalArgumentException("Queue is empty.");
         }
 
-        head = head.getNext();
-        return head.getValue();
+        head = head.next;
+        length--;
+
+        return head.value;
     }
 
     /**
@@ -78,6 +95,15 @@ public class LinkedQueue<T> {
         if (isEmpty()) {
             throw new IllegalArgumentException("Queue is empty.");
         }
-        return head.getNext().getValue();
+        return head.next.value;
+    }
+
+    public T getLast() {
+        QueueNode<T> current = head;
+        while (null != current.next) {
+            current = current.next;
+        }
+
+        return current.value;
     }
 }

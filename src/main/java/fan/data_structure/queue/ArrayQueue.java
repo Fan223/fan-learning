@@ -66,6 +66,23 @@ public class ArrayQueue<T> {
         return head == tail;
     }
 
+    public boolean isFull(){
+        return tail == capacity && 0 == head;
+    }
+
+    public void queryQueue(){
+        if (isEmpty()){
+            System.out.println("队列为空");
+            return;
+        }
+        for (int i = head; i < storage.length; i++) {
+            if (storage[i] != null){
+                System.out.print(storage[i] + " ");
+            }
+        }
+        System.out.println();
+    }
+
     /**
      * 入队
      *
