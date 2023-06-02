@@ -1,6 +1,8 @@
 package fan.data_structure.tree;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * 树节点
@@ -8,7 +10,9 @@ import lombok.Data;
  * @author Fan
  * @since 2023/5/22 15:02
  */
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class TreeNode {
 
     public Integer data;
