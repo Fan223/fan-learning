@@ -82,7 +82,7 @@ public class MaxTopHeap {
      * @author Fan
      * @since 2023/6/6 11:32
      */
-    private void swap(int[] arr, int i, int j) {
+    public static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -112,7 +112,7 @@ public class MaxTopHeap {
      * @author Fan
      * @since 2023/6/6 14:26
      */
-    private void heapify(int[] storage, int count, int i) {
+    public static void heapify(int[] storage, int count, int i) {
         while (true) {
             int max = i;
 

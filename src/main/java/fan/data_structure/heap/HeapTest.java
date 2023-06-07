@@ -31,5 +31,6 @@ public class HeapTest {
 
         heap.removeMax();
         heap.queryHeap();
+        System.out.println(heap.size());
     }
 }
