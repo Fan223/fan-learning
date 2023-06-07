@@ -9,17 +9,17 @@ package fan.data_structure.tree;
 public class RBTreeNode<T extends Comparable<T>> {
 
     /**
-     * red or black
+     * 红色或黑色
      */
     boolean color;
 
     T key;
 
-    RBTreeNode leftChildren;
+    RBTreeNode<T> left;
 
-    RBTreeNode rightChildren;
+    RBTreeNode<T> right;
 
-    RBTreeNode parent;
+    RBTreeNode<T> parent;
 
     public RBTreeNode(T key, boolean color) {
         this.key = key;

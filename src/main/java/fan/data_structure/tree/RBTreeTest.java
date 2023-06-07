@@ -2,7 +2,7 @@ package fan.data_structure.tree;
 
 public class RBTreeTest {
     public static void main(String[] args) {
-        RBTree<String> tree=new RBTree<>();
+        RBTree<String> tree = new RBTree<>();
 
         tree.insert("A");
         tree.insert("C");
