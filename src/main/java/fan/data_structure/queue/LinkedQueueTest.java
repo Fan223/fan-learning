@@ -19,17 +19,17 @@ public class LinkedQueueTest {
         linkQueue.enqueue("李四");
 
         // 1
-        System.out.println("出队元素：" + linkQueue.dequeue());
+        System.out.println("出队元素: " + linkQueue.dequeue());
         // 张三
-        System.out.println("队头元素：" + linkQueue.peek());
+        System.out.println("队头元素: " + linkQueue.peek());
         // 李四
-        System.out.println("队尾元素：" + linkQueue.getLast());
+        System.out.println("队尾元素: " + linkQueue.getLast());
         // 张三
-        System.out.println("出队元素：" + linkQueue.dequeue());
+        System.out.println("出队元素: " + linkQueue.dequeue());
 
         linkQueue.queryQueue();
 
         // 2
-        System.out.println("队列长度：" + linkQueue.getLength());
+        System.out.println("队列长度: " + linkQueue.getLength());
     }
 }

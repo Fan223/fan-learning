@@ -30,14 +30,14 @@ public class CallerTask implements Callable<String> {
         FutureTask<String> futureTask = new FutureTask<>(new CallerTask());
         Thread thread1 = new Thread(futureTask);
         Thread thread2 = new Thread(futureTask);
-        thread1.setName("一号窗口：");
-        thread2.setName("二号窗口：");
+        thread1.setName("一号窗口: ");
+        thread2.setName("二号窗口: ");
         thread1.start();
         thread2.start();
 
         try {
             String result = futureTask.get();
-            log.info("result：" + result);
+            log.info("result: " + result);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {

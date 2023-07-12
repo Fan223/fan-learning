@@ -54,7 +54,7 @@ public class NettyServer {
                         ch.pipeline().addLast(new NettyServerHandler());
                     }
                 });
-        // 绑定端口，同步等待绑定成功
+        // 绑定端口, 同步等待绑定成功
         try {
             ChannelFuture channelFuture = bootstrap.bind(port).sync();
             // 等待服务端监听端口关闭

@@ -32,7 +32,7 @@ public class NettyKryoDecoder extends ByteToMessageDecoder {
      * 解码 ByteBuf 对象
      *
      * @param ctx 解码器关联的 ChannelHandlerContext 对象
-     * @param in  "入站"数据，也就是 ByteBuf 对象
+     * @param in  "入站"数据, 也就是 ByteBuf 对象
      * @param out 解码之后的数据对象需要添加到 out 对象里面
      * @author Fan
      * @since 2023/5/5 8:57
@@ -41,7 +41,7 @@ public class NettyKryoDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
         // 1. byteBuf 中写入的消息长度所占的字节数已经是 4 了, 所以 byteBuf 的可读字节必须大于 4
         if (in.readableBytes() >= BODY_LENGTH) {
-            // 2. 标记当前 readIndex 的位置，以便后面重置 readIndex 的时候使用
+            // 2. 标记当前 readIndex 的位置, 以便后面重置 readIndex 的时候使用
             in.markReaderIndex();
             // 3. 读取消息的长度, 这里消息长度是 encode 的时候我们自己写入的, 即 NettyKryoEncoder 的 encode 方法
             int messageLength = in.readInt();

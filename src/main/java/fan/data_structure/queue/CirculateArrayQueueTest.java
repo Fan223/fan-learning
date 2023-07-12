@@ -17,9 +17,9 @@ public class CirculateArrayQueueTest {
         // 李四 张三 1
         circularQueue.enqueue("李四");
 
-        System.out.println("出队元素：" + circularQueue.dequeue());
-        System.out.println("队头元素：" + circularQueue.peek());
-        System.out.println("出队元素：" + circularQueue.dequeue());
+        System.out.println("出队元素: " + circularQueue.dequeue());
+        System.out.println("队头元素: " + circularQueue.peek());
+        System.out.println("出队元素: " + circularQueue.dequeue());
 
         circularQueue.queryQueue();
 
@@ -30,6 +30,6 @@ public class CirculateArrayQueueTest {
 
         circularQueue.queryQueue();
 
-        System.out.println("队尾元素：" + circularQueue.getLast());
+        System.out.println("队尾元素: " + circularQueue.getLast());
     }
 }

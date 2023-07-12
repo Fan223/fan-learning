@@ -4,10 +4,11 @@ import fan.core.util.MapUtil;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
- * 暴力匹配升级版
+ * RK算法, 暴力匹配升级版
  *
  * @author Fan
  * @since 2023/7/11 15:48
@@ -21,55 +22,66 @@ public class RabinKarp {
 
     public static void main(String[] args) {
         String main = "baddef";
-        String pattern = "badge";
+        String pattern = "dfe";
         System.out.println(rabinKarp(main, pattern));
     }
 
+    /**
+     * 暴力匹配优化, 利用哈希算法来提供匹配效率
+     *
+     * @param main    主串
+     * @param pattern 模式串
+     * @return {@link int}
+     * @author Fan
+     * @since 2023/7/12 9:16
+     */
     public static int rabinKarp(String main, String pattern) {
         if (main.length() < pattern.length()) {
             return -1;
         }
 
-        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Character> deque = new ArrayDeque<>();
         int mainHash = 0;
         int patternHash = 0;
 
         for (int i = 0; i < pattern.length(); i++) {
             patternHash += PRIME_MAP.get(pattern.charAt(i));
-            Integer hash = PRIME_MAP.get(main.charAt(i));
-            deque.push(hash);
-            mainHash += hash;
+            char ch = main.charAt(i);
+            deque.push(ch);
+            mainHash += PRIME_MAP.get(ch);
         }
 
-        if (patternHash == mainHash) {
+        // 哈希值相等再判断字符串是否匹配, 解决哈希冲突问题
+        if (patternHash == mainHash && match(deque, pattern)) {
             return 0;
         }
 
         for (int i = 1; i < main.length() - pattern.length() + 1; i++) {
-            int currentHash = PRIME_MAP.get(main.charAt(pattern.length() + i - 1));
-            int newHash = mainHash - deque.getLast() + currentHash;
+            char current = main.charAt(pattern.length() + i - 1);
+            int newHash = mainHash - PRIME_MAP.get(deque.getLast()) + PRIME_MAP.get(current);
 
-            if (patternHash == newHash) {
-                int temp = 0;
-                while (temp < pattern.length()) {
-                    // 每次主串后移一位与模式串比较
-                    if (main.charAt(i + temp) == pattern.charAt(temp)) {
-                        temp++;
-                    } else {
-                        break;
-                    }
-                }
+            deque.removeLast();
+            deque.push(current);
+            mainHash = newHash;
 
-                if (temp == pattern.length()) {
-                    return i;
-                }
-            } else {
-                deque.removeLast();
-                deque.push(currentHash);
-                mainHash = newHash;
+            if (patternHash == newHash && match(deque, pattern)) {
+                return i;
             }
         }
 
         return -1;
+    }
+
+    private static boolean match(Deque<Character> deque, String pattern) {
+        Iterator<Character> iterator = deque.iterator();
+        int index = pattern.length();
+
+        while (iterator.hasNext()) {
+            if (pattern.charAt(--index) != iterator.next()) {
+                break;
+            }
+        }
+
+        return index == 0;
     }
 }

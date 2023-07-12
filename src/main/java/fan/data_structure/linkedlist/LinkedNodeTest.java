@@ -26,7 +26,7 @@ public class LinkedNodeTest {
         }
         System.out.println();
 
-        System.out.println("删除的元素：" + linkNode.remove(2));
+        System.out.println("删除的元素: " + linkNode.remove(2));
         for (Object o : linkNode) {
             System.out.print(o + " ");
         }

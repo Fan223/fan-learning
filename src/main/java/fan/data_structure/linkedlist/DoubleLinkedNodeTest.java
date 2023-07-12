@@ -33,7 +33,7 @@ public class DoubleLinkedNodeTest {
         }
         System.out.println();
 
-        System.out.println("长度：" + doubleLinkNode.getLength());
+        System.out.println("长度: " + doubleLinkNode.getLength());
 
         doubleLinkNode.reverse();
         for (Object o : doubleLinkNode) {

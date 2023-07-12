@@ -19,11 +19,11 @@ import java.nio.channels.CompletionHandler;
 @Slf4j
 public class AsynchronousServer {
     public static void main(String[] args) throws IOException {
-        // 实例化，并监听端口
+        // 实例化, 并监听端口
         AsynchronousServerSocketChannel server =
                 AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(8080));
 
-        // 自己定义一个 Attachment 类，用于传递一些信息
+        // 自己定义一个 Attachment 类, 用于传递一些信息
         Attachment att = new Attachment();
         att.setServer(server);
 
@@ -32,9 +32,9 @@ public class AsynchronousServer {
             public void completed(AsynchronousSocketChannel client, Attachment att) {
                 try {
                     SocketAddress clientAddr = client.getRemoteAddress();
-                    log.info("收到新的连接：" + clientAddr);
+                    log.info("收到新的连接: " + clientAddr);
 
-                    // 收到新的连接后，server 应该重新调用 accept 方法等待新的连接进来
+                    // 收到新的连接后, server 应该重新调用 accept 方法等待新的连接进来
                     att.getServer().accept(att, this);
 
                     Attachment newAtt = new Attachment();
@@ -43,7 +43,7 @@ public class AsynchronousServer {
                     newAtt.setReadMode(true);
                     newAtt.setBuffer(ByteBuffer.allocate(2048));
 
-                    // 这里也可以继续使用匿名实现类，不过代码不好看，所以这里专门定义一个类
+                    // 这里也可以继续使用匿名实现类, 不过代码不好看, 所以这里专门定义一个类
                     client.read(newAtt.getBuffer(), newAtt, new ChannelHandler());
                 } catch (IOException ex) {
                     ex.printStackTrace();

@@ -28,7 +28,7 @@ public class ChannelHandler implements CompletionHandler<Integer, Attachment> {
             String msg = new String(buffer.array()).trim();
             log.info("收到来自客户端的数据: " + msg);
 
-            // 响应客户端请求，返回数据
+            // 响应客户端请求, 返回数据
             buffer.clear();
             buffer.put("Response from server!".getBytes(Charset.forName(StandardCharsets.UTF_8.toString())));
             att.setReadMode(false);
@@ -36,13 +36,13 @@ public class ChannelHandler implements CompletionHandler<Integer, Attachment> {
             // 写数据到客户端也是异步
             att.getClient().write(buffer, att, this);
         } else {
-            // 到这里，说明往客户端写数据也结束了，有以下两种选择:
+            // 到这里, 说明往客户端写数据也结束了, 有以下两种选择:
             // 1. 继续等待客户端发送新的数据过来
 //            att.setReadMode(true);
 //            att.getBuffer().clear();
 //            att.getClient().read(att.getBuffer(), att, this);
             try {
-                // 2. 既然服务端已经返回数据给客户端，断开这次的连接
+                // 2. 既然服务端已经返回数据给客户端, 断开这次的连接
                 att.getClient().close();
             } catch (IOException e) {
                 log.info(e.getMessage());

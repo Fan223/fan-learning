@@ -28,7 +28,7 @@ public class ClientChannelHandler implements CompletionHandler<Integer, Attachme
             String msg = new String(bytes, Charset.forName(StandardCharsets.UTF_8.toString()));
             log.info("收到来自服务端的响应数据: " + msg);
 
-            // 接下来，有以下两种选择:
+            // 接下来, 有以下两种选择:
             // 1. 向服务端发送新的数据
 //            att.setReadMode(false);
 //            buffer.clear();
@@ -44,7 +44,7 @@ public class ClientChannelHandler implements CompletionHandler<Integer, Attachme
                 log.info(e.getMessage());
             }
         } else {
-            // 写操作完成后，会进到这里
+            // 写操作完成后, 会进到这里
             att.setReadMode(true);
             buffer.clear();
             att.getClient().read(buffer, att, this);

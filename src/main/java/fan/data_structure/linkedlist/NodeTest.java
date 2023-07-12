@@ -79,7 +79,7 @@ public class NodeTest {
         }
         // 该节点的下一个节点就是要删除的节点
         Node delNode = currentNode.next;
-        // 让该节点的下一个节点为删除节点的下一个节点，指定位置的节点就被删除了
+        // 让该节点的下一个节点为删除节点的下一个节点, 指定位置的节点就被删除了
         currentNode.next = delNode.next;
     }
 }

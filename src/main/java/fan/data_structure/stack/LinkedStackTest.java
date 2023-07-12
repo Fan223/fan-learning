@@ -14,8 +14,8 @@ public class LinkedStackTest {
         linkStack.push(2);
 
         System.out.println(linkStack.pop());
-        System.out.println("栈顶元素：" + linkStack.peek());
-        System.out.println("链表长度：" + linkStack.getLength());
+        System.out.println("栈顶元素: " + linkStack.peek());
+        System.out.println("链表长度: " + linkStack.getLength());
 
         linkStack.queryAll();
     }

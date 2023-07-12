@@ -18,7 +18,7 @@ public class AsynchronousClient {
         AsynchronousSocketChannel client = AsynchronousSocketChannel.open();
         // 来个 Future 形式的
         Future<?> future = client.connect(new InetSocketAddress("127.0.0.1", 8080));
-        // 阻塞一下，等待连接成功
+        // 阻塞一下, 等待连接成功
         future.get();
 
         Attachment att = new Attachment();
@@ -32,7 +32,7 @@ public class AsynchronousClient {
         // 异步发送数据到服务端
         client.write(att.getBuffer(), att, new ClientChannelHandler());
 
-        // 这里休息一下再退出，给出足够的时间处理数据
+        // 这里休息一下再退出, 给出足够的时间处理数据
         Thread.sleep(2000);
     }
 }

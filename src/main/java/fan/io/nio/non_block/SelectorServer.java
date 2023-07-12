@@ -26,7 +26,7 @@ public class SelectorServer {
         ServerSocketChannel server = ServerSocketChannel.open();
         server.socket().bind(new InetSocketAddress(8080));
 
-        // 将其注册到 Selector 中，监听 OP_ACCEPT 事件
+        // 将其注册到 Selector 中, 监听 OP_ACCEPT 事件
         server.configureBlocking(false);
         server.register(selector, SelectionKey.OP_ACCEPT);
 
@@ -47,8 +47,8 @@ public class SelectorServer {
                     // 有已经接受的新的到服务端的连接
                     SocketChannel socketChannel = server.accept();
 
-                    // 有新的连接并不代表这个通道就有数据，
-                    // 这里将这个新的 SocketChannel 注册到 Selector，监听 OP_READ 事件，等待数据
+                    // 有新的连接并不代表这个通道就有数据
+                    // 这里将这个新的 SocketChannel 注册到 Selector, 监听 OP_READ 事件, 等待数据
                     socketChannel.configureBlocking(false);
                     socketChannel.register(selector, SelectionKey.OP_READ);
                 } else if (key.isReadable()) {
@@ -61,7 +61,7 @@ public class SelectorServer {
                         int num = socketChannel.read(readBuffer);
                         if (num > 0) {
                             // 处理进来的数据...
-                            log.info("收到数据：" + new String(readBuffer.array()).trim());
+                            log.info("收到数据: " + new String(readBuffer.array()).trim());
                             ByteBuffer buffer = ByteBuffer.wrap("返回给客户端的数据...".getBytes());
                             socketChannel.write(buffer);
                         } else if (num == -1) {

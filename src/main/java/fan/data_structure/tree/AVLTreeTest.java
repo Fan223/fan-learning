@@ -15,7 +15,7 @@ public class AVLTreeTest {
         avlTree.preOrder(avlTree.root);
         System.out.println();
 
-        System.out.println("树的高度：" + avlTree.getHeight(avlTree.root));
-        System.out.println("树的节点数：" + avlTree.getSize());
+        System.out.println("树的高度: " + avlTree.getHeight(avlTree.root));
+        System.out.println("树的节点数: " + avlTree.getSize());
     }
 }

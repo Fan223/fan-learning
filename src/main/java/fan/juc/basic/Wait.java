@@ -26,7 +26,7 @@ public class Wait {
                         // 获取 resourceB 共享资源的监视器锁
                         synchronized (resourceB) {
                             log.info("threadA get resourceB lock");
-                            // 线程 A 阻塞，并释放获取到的 resourceA 的锁
+                            // 线程 A 阻塞, 并释放获取到的 resourceA 的锁
                             log.info("threadA release resourceA lock");
                             resourceA.wait();
                         }
@@ -49,7 +49,7 @@ public class Wait {
                         // 获取 resourceB 共享资源的监视器锁
                         synchronized (resourceB) {
                             log.info("threadB get resourceB lock");
-                            // 线程 A 阻塞，并释放获取到的 resourceA 的锁
+                            // 线程 A 阻塞, 并释放获取到的 resourceA 的锁
                             log.info("threadB release resourceA lock");
                             resourceA.wait();
                         }

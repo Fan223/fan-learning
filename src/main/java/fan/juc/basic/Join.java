@@ -34,7 +34,7 @@ public class Join {
         threadTwo.start();
         log.info("Wait All Child Thread Over");
 
-        // 等待子线程执行完毕，返回
+        // 等待子线程执行完毕, 返回
         threadOne.join();
         threadTwo.join();
         log.info("All Child Thread Over");

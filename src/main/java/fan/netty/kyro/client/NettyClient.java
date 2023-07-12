@@ -44,8 +44,8 @@ public class NettyClient {
         BOOT_STRAP.group(eventLoopGroup)
                 .channel(NioSocketChannel.class)
                 .handler(new LoggingHandler(LogLevel.INFO))
-                // 连接的超时时间，超过这个时间还是建立不上的话则代表连接失败
-                // 如果 15 秒之内没有发送数据给服务端的话，就发送一次心跳请求
+                // 连接的超时时间, 超过这个时间还是建立不上的话则代表连接失败
+                // 如果 15 秒之内没有发送数据给服务端的话, 就发送一次心跳请求
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 15000)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
@@ -83,7 +83,7 @@ public class NettyClient {
                         log.info("发送消息失败" + future.cause());
                     }
                 });
-                // 阻塞等待 ，直到Channel关闭
+                // 阻塞等待 , 直到Channel关闭
                 channel.closeFuture().sync();
                 // 将服务端返回的数据也就是 RpcResponse 对象取出
                 AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse");
