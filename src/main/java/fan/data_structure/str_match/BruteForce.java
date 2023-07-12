@@ -10,7 +10,7 @@ public class BruteForce {
 
     public static void main(String[] args) {
         String main = "baddef";
-        String pattern = "def6";
+        String pattern = "ef";
         System.out.println(bruteForce(main, pattern));
     }
 
@@ -28,18 +28,16 @@ public class BruteForce {
             return -1;
         }
 
-        for (int i = 0; i < main.length() - pattern.length(); i++) {
-            int temp = 0;
-            while (temp < pattern.length()) {
+        for (int i = 0; i <= main.length() - pattern.length(); i++) {
+            int j;
+            for (j = 0; j < pattern.length(); j++) {
                 // 每次主串后移一位与模式串比较
-                if (main.charAt(i + temp) == pattern.charAt(temp)) {
-                    temp++;
-                } else {
+                if (main.charAt(i + j) != pattern.charAt(j)) {
                     break;
                 }
             }
 
-            if (temp == pattern.length()) {
+            if (j == pattern.length()) {
                 return i;
             }
         }

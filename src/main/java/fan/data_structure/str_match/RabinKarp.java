@@ -22,12 +22,12 @@ public class RabinKarp {
 
     public static void main(String[] args) {
         String main = "baddef";
-        String pattern = "dfe";
+        String pattern = "baded";
         System.out.println(rabinKarp(main, pattern));
     }
 
     /**
-     * 暴力匹配优化, 利用哈希算法来提供匹配效率
+     * 暴力匹配优化, 利用哈希算法来提高匹配效率
      *
      * @param main    主串
      * @param pattern 模式串
@@ -56,15 +56,13 @@ public class RabinKarp {
             return 0;
         }
 
-        for (int i = 1; i < main.length() - pattern.length() + 1; i++) {
+        for (int i = 1; i <= main.length() - pattern.length(); i++) {
             char current = main.charAt(pattern.length() + i - 1);
-            int newHash = mainHash - PRIME_MAP.get(deque.getLast()) + PRIME_MAP.get(current);
-
+            mainHash = mainHash - PRIME_MAP.get(deque.getLast()) + PRIME_MAP.get(current);
             deque.removeLast();
             deque.push(current);
-            mainHash = newHash;
 
-            if (patternHash == newHash && match(deque, pattern)) {
+            if (patternHash == mainHash && match(deque, pattern)) {
                 return i;
             }
         }
