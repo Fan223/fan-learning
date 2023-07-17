@@ -10,7 +10,7 @@ public class KnuthMorrisPratt {
 
     public static void main(String[] args) {
         String main = "baddef";
-        String pattern = "ef";
+        String pattern = "dde";
         System.out.println(knuthMorrisPratt(main, pattern));
     }
 
@@ -24,10 +24,12 @@ public class KnuthMorrisPratt {
         int[] next = getNexts(patterns);
 
         int j = 0;
-        for (int i = 0; i < mainChars.length; ++i) {
-            while (j > 0 && mainChars[i] != patterns[j]) { // 一直找到 a[i] 和 b[j]
+        for (int i = 0; i < mainChars.length; i++) {
+            // 失配, j 指向匹配的前缀的下标后一位
+            while (j > 0 && mainChars[i] != patterns[j]) {
                 j = next[j - 1] + 1;
             }
+            // 匹配的前缀字符
             if (mainChars[i] == patterns[j]) {
                 j++;
             }
@@ -41,21 +43,32 @@ public class KnuthMorrisPratt {
         return -1;
     }
 
+    /**
+     * 获取 Next 数组
+     *
+     * @param patterns 模式串
+     * @return {@link int[]}
+     * @author Fan
+     * @since 2023/7/17 14:23
+     */
     private static int[] getNexts(char[] patterns) {
         int[] next = new int[patterns.length];
         next[0] = -1;
         int k = -1;
-        
-        for (int i = 1; i < patterns.length; ++i) {
+        //ada
+        for (int i = 1; i < patterns.length; i++) {
+            // 失配, 更改初始位置为公共前缀下标
             while (k != -1 && patterns[k + 1] != patterns[i]) {
                 k = next[k];
             }
+
+            // 前缀匹配到的字符
             if (patterns[k + 1] == patterns[i]) {
-                ++k;
+                k++;
             }
             next[i] = k;
         }
-        
+
         return next;
     }
 }
