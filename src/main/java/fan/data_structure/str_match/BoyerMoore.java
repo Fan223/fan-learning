@@ -11,8 +11,8 @@ public class BoyerMoore {
     private static final int SIZE = 256;
 
     public static void main(String[] args) {
-        String main = "baddef";
-        String pattern = "ef";
+        String main = "ababaeabac";
+        String pattern = "ababacd";
         System.out.println(boyerMoore(main, pattern));
     }
 

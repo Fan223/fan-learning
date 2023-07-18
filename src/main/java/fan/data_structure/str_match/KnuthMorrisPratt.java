@@ -9,8 +9,8 @@ package fan.data_structure.str_match;
 public class KnuthMorrisPratt {
 
     public static void main(String[] args) {
-        String main = "baddef";
-        String pattern = "dde";
+        String main = "ababaeabac";
+        String pattern = "ababacd";
         System.out.println(knuthMorrisPratt(main, pattern));
     }
 
@@ -55,7 +55,7 @@ public class KnuthMorrisPratt {
         int[] next = new int[patterns.length];
         next[0] = -1;
         int k = -1;
-        //ada
+
         for (int i = 1; i < patterns.length; i++) {
             // 失配, 更改初始位置为公共前缀下标
             while (k != -1 && patterns[k + 1] != patterns[i]) {
