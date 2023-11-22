@@ -1,4 +1,4 @@
-package fan.letcode;
+package fan.letcode.linkedlist;
 
 /**
  * 合并两个有序链表 <br>
