@@ -1,10 +1,9 @@
 package fan.net.rest_template;
 
+import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import javax.annotation.Resource;
 
 /**
  * RestTemplate 工具类

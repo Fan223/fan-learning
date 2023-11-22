@@ -1,6 +1,6 @@
 package fan.data_structure.str_match;
 
-import fan.core.util.MapUtil;
+import fan.core.map.MapUtil;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

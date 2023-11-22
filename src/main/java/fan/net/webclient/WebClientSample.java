@@ -1,10 +1,10 @@
 package fan.net.webclient;
 
-import fan.core.util.ListUtil;
-import fan.core.util.MapUtil;
+import fan.core.collection.ListUtil;
+import fan.core.map.MapUtil;
 import fan.log.LogUtil;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -116,11 +116,9 @@ public class WebClientSample {
                 .exchangeToMono(clientResponse -> {
                     // 响应头
                     ClientResponse.Headers headers = clientResponse.headers();
-                    // 响应状态
-                    HttpStatus httpStatus = clientResponse.statusCode();
                     // 响应状态码
-                    int rawStatusCode = clientResponse.rawStatusCode();
-                    LogUtil.info(headers.toString() + httpStatus + rawStatusCode);
+                    HttpStatusCode httpStatusCode = clientResponse.statusCode();
+                    LogUtil.info(headers.toString() + httpStatusCode);
 
                     // 响应体
                     return clientResponse.bodyToMono(String.class);
