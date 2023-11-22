@@ -9,6 +9,23 @@ package fan.letcode.linkedlist;
  * @since 2023/5/19 16:25
  */
 public class MergeTwoLists {
+     static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
     public static void main(String[] args) {
         ListNode possibilities = mergeTwoLists(new ListNode(1), new ListNode(2));
 
@@ -38,19 +55,4 @@ public class MergeTwoLists {
     }
 }
 
-class ListNode {
-    int val;
-    ListNode next;
 
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
-    }
-}
