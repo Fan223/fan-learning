@@ -19,21 +19,33 @@ package fan.letcode.array;
 public class MinDeletion {
     public static void main(String[] args) {
         int[] nums = {1, 1, 2, 2, 3, 3};
-        int i = minDeletion(nums);
-        System.out.println(i);
+        System.out.println(minDeletion(nums));
     }
 
+    /**
+     * 判断相邻的两个数是否相等(current 与 next), 如果相等, 则需要删除的数量+1(即删除 current), 同时继续往后比较, 直到不相等,
+     * 则此时的 current 与 next 形成了一组 nums[i] != nums[i + 1]. 因此当继续往后走到 next 变成 current, 不需要往后比较
+     * 这里用一个布尔值来记录状态, 表示此时 current 是与前面的数一组, 跳过比较. 跳过比较的时候就将状态反转, 下一次则需要比较.
+     * 时间复杂度: O(n), 空间复杂度: O(1)
+     *
+     * @param nums 数组
+     * @return {@link int}
+     * @author Fan
+     * @since 2023/11/24 16:30
+     */
     public static int minDeletion(int[] nums) {
         int n = nums.length;
         int ans = 0;
         boolean check = true;
 
+        /*
+         * 过程示例:
+         * 1. [1(current), 1(next), 2, 2, 3, 3] -> [1(current), 2(next), 2, 3, 3]
+         * 2. [1(current), 2(next), 2, 3, 3] -> [1, 2(current), 2(next), 3, 3], 此时的 current 跳过比较
+         * [1, 2(current), 2(next), 3, 3] -> [(1, 2), 2(current), 3(next), 3], 重复前面的步骤即可
+         * [(1, 2), (2, 3), 3] -> [(1, 2), (2, 3)], 由于删除了一位元素, 数组长度减去删除的元素数量为奇数, 需要将最后一个元素删除
+         */
         for (int i = 0; i + 1 < n; ++i) {
-            /*
-             * 判断相邻的两个数是否相等(current 与 next), 如果相等, 则需要删除的数量+1(即删除 current), 同时继续往后比较, 直到不相等,
-             * 则此时的 current 与 next 形成了一组 nums[i] != nums[i + 1]. 因此当继续往后走到 next 变成 current, 不需要往后比较
-             * 这里用一个布尔值来记录状态, 表示此时 current 是与前面的数一组, 跳过比较. 跳过比较的时候就将状态反转, 下一次则需要比较
-             */
             if (check && nums[i] == nums[i + 1]) {
                 ++ans;
             } else {
@@ -46,13 +58,5 @@ public class MinDeletion {
             ++ans;
         }
         return ans;
-
-        /*
-         * 过程示例:
-         * 1. [1(current), 1(next), 2, 2, 3, 3] -> [1(current), 2(next), 2, 3, 3]
-         * 2. [1(current), 2(next), 2, 3, 3] -> [1, 2(current), 2(next), 3, 3], 此时的 current 跳过比较
-         * [1, 2(current), 2(next), 3, 3] -> [(1, 2), 2(current), 3(next), 3], 重复前面的步骤即可
-         * [(1, 2), (2, 3), 3] -> [(1, 2), (2, 3)], 由于删除了一位元素, 数组长度减去删除的元素数量为奇数, 需要将最后一个元素删除
-         */
     }
 }

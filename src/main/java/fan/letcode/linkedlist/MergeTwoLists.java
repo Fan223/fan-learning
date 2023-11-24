@@ -1,7 +1,7 @@
 package fan.letcode.linkedlist;
 
 /**
- * 合并两个有序链表 <br>
+ * <p> 合并两个有序链表 </p>
  * 题目: 将两个升序链表合并为一个新的升序链表并返回, 新链表是通过拼接给定的两个链表的所有节点组成的 <br>
  * 如: l1 = [1,2,4], l2 = [1,3,4], 输出: [1,1,2,3,4,4]
  *
@@ -9,7 +9,7 @@ package fan.letcode.linkedlist;
  * @since 2023/5/19 16:25
  */
 public class MergeTwoLists {
-     static class ListNode {
+    static class ListNode {
         int val;
         ListNode next;
 
